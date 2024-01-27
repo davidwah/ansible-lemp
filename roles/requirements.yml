@@ -1,0 +1,7 @@
+---
+
+- src: geerlingguy.nginx
+
+- src: cloudweeb.mariadb
+
+- src: cloudweeb.php

@@ -1,0 +1,13 @@
+---
+
+- name: Set MariaDB config file
+  template:
+    src: etc_my.cnf.j2
+    dest: "{{ mariadb_conf_file }}"
+  notify: restart mariadb
+
+- name: Ensure MariaDB is started
+  service:
+    name: mariadb
+    state: started
+    enabled: true

@@ -1,0 +1,22 @@
+---
+dependencies: []
+
+galaxy_info:
+  role_name: mariadb
+  author: Agnesius Santo Naibaho
+  description: Install MariaDB Server
+  company: Cloudweeb
+
+  license: MIT
+
+  min_ansible_version: 2.7
+
+  platforms:
+    - name: Debian
+      versions:
+        - stretch
+    - name: EL
+      versions:
+        - 7
+
+  galaxy_tags: []

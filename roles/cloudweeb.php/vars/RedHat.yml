@@ -1,0 +1,21 @@
+---
+
+php_web_server_daemon: httpd
+php_fpm_bin: php-fpm
+php_fpm_daemon: php-fpm
+php_base_packages:
+  - php
+  - php-cli
+  - php-common
+  - php-fpm
+
+php_conf_dir:
+  - /etc
+
+php_fpm_user: '{{ (php_web_server_daemon == "httpd") | ternary("apache", "nginx") }}'
+php_fpm_group: '{{ php_fpm_user }}'
+
+php_fpm_listen_owner: '{{ php_fpm_user }}'
+php_fpm_listen_group: '{{ php_fpm_user }}'
+
+php_fpm_pool_conf_path: /etc/php-fpm.d

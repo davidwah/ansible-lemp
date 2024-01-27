@@ -1,0 +1,15 @@
+---
+
+- name: restart web server
+  service:
+    name: "{{ php_web_server_daemon }}"
+    state: restarted
+  listen: restart web server
+  when: php_web_server_enabled | bool
+
+- name: restart php-fpm
+  service:
+    name: "{{ php_fpm_daemon }}"
+    state: restarted
+  listen: restart web server
+  when: php_fpm_enabled | bool

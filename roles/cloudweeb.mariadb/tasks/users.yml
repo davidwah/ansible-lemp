@@ -1,0 +1,11 @@
+---
+
+- name: Manage database users
+  mysql_user:
+    name: "{{ item.name }}"
+    password: "{{ item.password }}"
+    host: "{{ item.host | default('localhost') }}"
+    priv: "{{ item.priv | default(omit) }}"
+    state: "{{ item.state | default('present') }}"
+  loop: "{{ mariadb_users }}"
+  no_log: true

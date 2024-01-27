@@ -1,0 +1,44 @@
+{{ ansible_managed | comment }}
+
+[mysqld]
+datadir=/var/lib/mysql
+socket={{ mariadb_socket_file }}
+symbolic-links=0
+
+bind_address = {{ mariadb_bind_address }}
+port = {{ mariadb_port }}
+
+skip-external-locking
+key_buffer_size = {{ mariadb_key_buffer_size }}
+max_allowed_packet = {{ mariadb_max_allowed_packet }}
+table_open_cache = {{ mariadb_table_open_cache }}
+sort_buffer_size = {{ mariadb_sort_buffer_size }}
+read_buffer_size = {{ mariadb_read_buffer_size }}
+read_rnd_buffer_size = {{ mariadb_read_rnd_buffer_size }}
+net_buffer_length = {{ mariadb_net_buffer_length }}
+thread_stack = {{ mariadb_thread_stack }}
+
+max_connections = {{ mariadb_max_connections }}
+max_user_connections = {{ mariadb_max_user_connections }}
+wait_timeout = {{ mariadb_wait_timeout }}
+interactive_timeout = {{ mariadb_interactive_timeout }}
+long_query_time = {{ mariadb_long_query_time }}
+
+innodb_file_per_table   = {{ 'ON' if mariadb_innodb_file_per_table|bool else 'OFF' }}
+innodb_buffer_pool_size = {{ mariadb_innodb_buffer_pool_size }}
+innodb_log_file_size    = {{ mariadb_innodb_log_file_size }}
+innodb_buffer_pool_instances = {{ mariadb_innodb_buffer_pool_instances }}
+
+slow_query_log = {{ '1' if mariadb_slow_query_log|bool else '0' }}
+slow_query_log_file = {{ mariadb_slow_query_log_file }}
+
+log-error = {{ mariadb_error_log_file }}
+pid-file = {{ mariadb_pid_file }}
+
+skip-networking = {{ '1' if mariadb_skip_networking|bool else '0' }}
+skip-name-resolve = {{ '1' if mariadb_skip_networking|bool else '0' }}
+
+#
+# include all files from the config directory
+#
+!includedir {{ mariadb_include_dir }}

@@ -1,0 +1,13 @@
+---
+
+# mariadb_repository_url: http://mirror.rackspace.com/{{ mariadb_version }}/{{ ansible_distribution|lower }}{{ ansible_distribution_major_version|lower }}-amd64
+mariadb_repository_url: http://mirror.rackspace.com/mariadb/yum/10.6/rhel7-amd64
+
+mariadb_conf_file: /etc/my.cnf
+mariadb_include_dir: /etc/my.cnf.d/
+mariadb_socket_file: /var/lib/mysql/mysql.sock
+
+mariadb_base_packages:
+  - MariaDB-server
+  - MariaDB-client
+  - MySQL-python

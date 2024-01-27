@@ -1,0 +1,22 @@
+---
+
+# - name: Prepare server
+#   hosts: lemp
+#   gather_facts: no
+#   tasks:
+#   - name: Wait 600 seconds for target connection to become reachable/usable
+#     wait_for_connection:
+
+- name: Install & manage LEMP server
+  hosts: lemp
+
+  roles:
+
+    - role: geerlingguy.nginx
+      tags: role::nginx
+
+    - role: cloudweeb.php
+      tags: role::php
+
+    - role: cloudweeb.mariadb
+      tags: role::mariadb

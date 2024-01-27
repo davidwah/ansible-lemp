@@ -1,0 +1,46 @@
+---
+- block:
+
+    - name: (Install CentOS/RedHat) Add MariaDB Repository
+      yum_repository:
+        file: MariaDB
+        name: mariadb
+        baseurl: "{{ mariadb_repository_url }}"
+        description: MariaDB
+        gpgkey: https://mirror.rackspace.com/mariadb/yum/RPM-GPG-KEY-MariaDB
+        gpgcheck: true
+
+    - name: (Install CentOS/RedHat) Install MariaDB packages
+      yum:
+        name: "{{ query('flattened', ['{{ mariadb_base_packages }}',
+                                      '{{ mariadb_packages }}']) }}"
+        state: present
+
+  when: ansible_os_family == 'RedHat'
+
+- block:
+
+    - name: (Install Debian) Ensure gnupg is installed
+      apt:
+        name: ['gnupg', 'ca-certificates', 'apt-transport-https']
+        state: present
+
+    - name: (Install Debian) Import MariaDB signing key
+      apt_key:
+        keyserver: hkp://keyserver.ubuntu.com:80
+        id: '0xF1656F24C74CD1D8'
+
+    - name: (Install Debian) Add MariaDB Repository
+      apt_repository:
+        repo: "deb [arch=amd64,arm64,ppc64el] {{ mariadb_repository_url }} {{ ansible_distribution_release }} main"
+        filename: MariaDB
+        state: present
+        update_cache: true
+
+    - name: (Install Debian) Install MariaDB packages
+      apt:
+        name: "{{ query('flattened', ['{{ mariadb_base_packages }}',
+                                      '{{ mariadb_packages }}']) }}"
+        state: present
+
+  when: ansible_os_family == 'Debian'

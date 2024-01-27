@@ -1,0 +1,12 @@
+---
+
+mariadb_repository_url: http://sgp1.mirrors.digitalocean.com/mariadb/repo/{{ mariadb_version }}/{{ ansible_distribution | lower }}
+
+mariadb_conf_file: /etc/mysql/my.cnf
+mariadb_include_dir: /etc/mysql/conf.d/
+mariadb_socket_file: /var/run/mysqld/mysqld.sock
+
+mariadb_base_packages:
+  - mariadb-server
+  - mariadb-client
+  - python-pymysql
